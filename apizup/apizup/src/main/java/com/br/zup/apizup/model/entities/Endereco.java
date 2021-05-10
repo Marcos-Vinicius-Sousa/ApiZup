@@ -4,73 +4,70 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.br.zup.apizup.model.entities.Cidade;
 import com.br.zup.apizup.model.entities.Usuario;
 
 @Entity
+@Table(name="tb_endereco")
+@Inheritance(strategy = InheritanceType.JOINED)
+@NamedQueries({@NamedQuery(name="Endereco.listarEnderecoPorUsuario",
+	query= "select e from Endereco e JOIN e.usuario u where u.id = ?1")})
 public class Endereco {
 
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	
-	@NotBlank
+	
 	private String logradouro;
-	
-	@NotBlank
-	@Min(1)
 	private int numero;
-	
 	private String complemento;
-	
-	@NotBlank
 	private String bairro;
-	
-	@NotBlank
+	private String cidade;
+	private String estado;
 	private String cep;
 	
-	@JsonIgnore
+	
 	@ManyToOne
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
 	
-	@ManyToOne
-	@JoinColumn(name="cidade_id")
-	private Cidade cidade;
+	
 	
 	public Endereco() {
 		
 	}
+	
 
-	public Endereco(int id, @NotBlank String logradouro, @NotBlank @Min(1) int numero, String complemento,
-			@NotBlank String bairro, @NotBlank String cep, Usuario usuario,
-			Cidade cidade) {
+	public Endereco(String logradouro, int numero, String complemento, String bairro, String cidade, String estado,
+			String cep, Usuario usuario) {
 		super();
-		this.id = id;
 		this.logradouro = logradouro;
 		this.numero = numero;
 		this.complemento = complemento;
 		this.bairro = bairro;
+		this.cidade = cidade;
+		this.estado = estado;
 		this.cep = cep;
 		this.usuario = usuario;
-		this.cidade = cidade;
-		
-		
-		
 	}
 
-	public int getId() {
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -114,21 +111,41 @@ public class Endereco {
 		this.cep = cep;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public Long getUsuario() {
+		return usuario.getId();
 	}
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 
-	public Cidade getCidade() {
+
+
+	public String getCidade() {
 		return cidade;
 	}
 
-	public void setCidade(Cidade cidade) {
+
+
+	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
+
+
+
+	public String getEstado() {
+		return estado;
+	}
+
+
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	
+	
+
+	
 	
 	
 }
