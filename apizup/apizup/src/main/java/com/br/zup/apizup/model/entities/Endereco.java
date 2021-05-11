@@ -11,10 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.br.zup.apizup.model.entities.Usuario;
+
 
 @Entity
 @Table(name="tb_endereco")
@@ -28,7 +25,7 @@ public class Endereco {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	
+
 	private String logradouro;
 	private int numero;
 	private String complemento;
@@ -49,8 +46,9 @@ public class Endereco {
 	}
 	
 
-	public Endereco(String logradouro, int numero, String complemento, String bairro, String cidade, String estado,
-			String cep, Usuario usuario) {
+	public Endereco(String logradouro, int numero, String complemento,
+					String bairro, String cidade, String estado,
+					String cep, Usuario usuario) {
 		super();
 		this.logradouro = logradouro;
 		this.numero = numero;

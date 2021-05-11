@@ -1,7 +1,6 @@
 package com.br.zup.apizup.service;
 
 import java.util.List;
-
 import com.br.zup.apizup.model.entities.Endereco;
 
 public interface ServiceInterface<T> {

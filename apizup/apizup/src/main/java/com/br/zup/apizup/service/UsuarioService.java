@@ -2,10 +2,8 @@ package com.br.zup.apizup.service;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.br.zup.apizup.model.entities.Endereco;
 import com.br.zup.apizup.model.entities.Usuario;
 import com.br.zup.apizup.model.repositories.UsuarioRepository;
@@ -51,7 +49,6 @@ implements ServiceInterface<Usuario>{
 			return true;
 		}
 			return false;
-		
 	}
 
 	@Override

@@ -2,9 +2,7 @@ package com.br.zup.apizup.controllers;
 
 
 import java.util.List;
-
 import org.springframework.http.ResponseEntity;
-
 import com.br.zup.apizup.model.entities.Endereco;
 
 public interface ControllerInterface<T> {

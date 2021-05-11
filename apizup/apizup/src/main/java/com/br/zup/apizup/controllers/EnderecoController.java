@@ -2,7 +2,7 @@ package com.br.zup.apizup.controllers;
 
 import java.util.List;
 
-import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,12 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.br.zup.apizup.model.entities.Endereco;
-import com.br.zup.apizup.model.entities.Usuario;
-import com.br.zup.apizup.model.repositories.EnderecoRepository;
 import com.br.zup.apizup.service.EnderecoService;
 
 
@@ -37,18 +33,19 @@ public class EnderecoController
 	}
 
 	@Override
+	@GetMapping(value="/enderecos/{codigo}")
+	public ResponseEntity<List<Endereco>> getByUsuario(
+											@PathVariable("codigo")  Long codigo){
+		return ResponseEntity.ok(service.listarEnderecoPorUsuario(codigo));
+	}
+	
+	@Override
 	@GetMapping
 	public ResponseEntity<List<Endereco>> getAll() {
 		return ResponseEntity.ok(service.findAll());
 	}
 	
-	@Override
-	@GetMapping(value="/enderecos/{codigo}")
-	public ResponseEntity<List<Endereco>> getByUsuario(
-											@PathVariable("codigo")  Long codigo){
-		return ResponseEntity.ok(service.listarEnderecoPorUsuario(codigo));
-		
-	}
+	
 
 	@Override
 	@DeleteMapping(value="/{id}")
